@@ -46,7 +46,7 @@ void insertionsort(int *v, int n) {
     }
 }
 
-//Implementação de ordenação com algoritimo insertionsort
+//Implementação de ordenação com algoritimo selectionsort
 void selectionsort(int *v, int n) {
     for (int i = 0; i < n-1; i++) {
         int menor = i;
