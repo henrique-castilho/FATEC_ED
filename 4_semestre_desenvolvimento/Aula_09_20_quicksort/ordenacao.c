@@ -35,7 +35,7 @@ int main(){
         selectionsort(v, n);
         fim = time(0);
         printf("\nn = %d, tempo selection = %d", n, fim - inicio);
-        //exibe_vetor(v, n, "Vetor ordenado selection");
+        //exibe_vetor(v, n, "Vetor ordenado);
 
         //Prenche o vetor e ordena com o quicksort
         preenche_vetor(v, n);
@@ -45,7 +45,13 @@ int main(){
         fim = time(0);
         printf("\nn = %d, tempo do quick = %d", n, fim - inicio);
         //exibe_vetor(v, n, "Vetor ordenado quick");
-
+        
+        //Ordernar o vetor ordenado
+        inicio = time(0);
+        quicksort(v, 0, n-1);
+        fim = time(0);
+        printf("\nn = %d, tempo do segundo quick = %d", n, fim - inicio);
+        
         free(v);
 
         printf("\nDigite o tamanho para um novo teste, 0 encerra: ");
