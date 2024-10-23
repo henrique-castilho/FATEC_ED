@@ -6,4 +6,4 @@ typedef struct no {
     struct no * proximo;
 } t_no;
 
-t_no * controi_no (int);
+t_no * constroi_no (int);
