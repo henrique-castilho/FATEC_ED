@@ -35,7 +35,7 @@ void exibe_lista (t_lista *l, char *msg) {
 }
 
 void insere_fim (t_lista * l, int num) {
-    t_no *novo = controi_no(num);
+    t_no *novo = constroi_no(num);
     if (lista_vazia(l)) {
         l->primeiro = novo;
     } else {
