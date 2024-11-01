@@ -41,15 +41,14 @@ void insere_fim(t_lista_dupla *l, int num) {
 void exibe_lista(t_lista_dupla *l, char *msg) {
     t_no_duplo *aux;
     printf("\n%s\n", msg);
-    if (lista_vazia) {
+    if (lista_vazia(l)) {
         printf("Lista Vazia");
     } else {
         aux = l->primeiro;
-        do {
-            printf("%d, ", aux->info);
+        while (aux != NULL) {
+            printf("%d ", aux->info);
             aux = aux->proximo;
-        } while (aux->proximo != l->ultimo);
-        printf ("%d", aux->info);
+        }
     }
     printf("\n");
 }

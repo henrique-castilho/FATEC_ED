@@ -14,19 +14,21 @@ int main () {
                 printf ("insercao de inicio\n");
             } else { //impar: insere final
                 insere_fim(&l, rand() % 10);
-                printf ("insecao de fim\n");
+                printf ("insercao de fim\n");
             }
             
         } else { //impar: remove
-             if (rand() % 2 == 0) { //par: remove do inicio
-                printf ("%d saiu do inicio\n", remove_inicio(&l));
-            } else { //impar: remove do final
-                printf ("%d saiu do fim\n", remove_fim(&l));
-            }  
+            if (!lista_vazia(&l)) {
+                if (rand() % 2 == 0) { //par: remove do inicio
+                    printf ("%d saiu do inicio\n", remove_inicio(&l));
+                } else { //impar: remove do final
+                    printf ("%d saiu do fim\n", remove_fim(&l));
+                }  
+            }
         }
+
         exibe_lista(&l, "");
     } while (!lista_vazia(&l));
-    
 
     return 0;
 }
