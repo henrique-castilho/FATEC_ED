@@ -24,7 +24,7 @@ void insere_inicio(t_lista_dupla *l, int num) {
     }
 }
 
-void isere_fim(t_lista_dupla *l, int num) {
+void insere_fim(t_lista_dupla *l, int num) {
    t_no_duplo * novo = constroi_no(num);
     if (novo != NULL) {
         if (lista_vazia(l)) {
@@ -52,4 +52,35 @@ void exibe_lista(t_lista_dupla *l, char *msg) {
         printf ("%d", aux->info);
     }
     printf("\n");
+}
+
+int remove_inicio(t_lista_dupla *l) {
+    int num = l->primeiro->info; //num é a informação que vai ser removido e devolvido
+    t_no_duplo *aux = l->primeiro; //aux é o ponteiro que guarda o endereço que vai ser liberado
+    if (l->primeiro == l->ultimo) { //tem um só
+        l->primeiro = NULL;
+        l->ultimo = NULL;
+    } else { //tem pelo menos 2
+        l->primeiro = l->primeiro->proximo; //primeiro passa ser o segundo
+        l->primeiro->anterior = NULL;
+    }
+    l->num_nos--;
+    free(aux);
+    return num;
+}
+
+
+int remove_fim(t_lista_dupla *l) {
+    int num = l->ultimo->info; //num é a informação que vai ser removido e devolvido
+    t_no_duplo *aux = l->ultimo; //aux é o ponteiro que guarda o endereço que vai ser liberado
+    if (l->ultimo == l->primeiro) { //tem um só
+        l->primeiro = NULL;
+        l->ultimo = NULL;
+    } else {
+        l->ultimo = l->ultimo->anterior; // ultímo passa ser o penultimo
+        l->ultimo->proximo = NULL;
+    }
+    l->num_nos--;
+    free(aux);
+    return num;
 }

@@ -9,5 +9,7 @@ typedef struct lista {
 void inicia_lista(t_lista_dupla *);
 int lista_vazia(t_lista_dupla *);
 void insere_inicio(t_lista_dupla *, int);
-void isere_fim(t_lista_dupla *, int);
-void exibe_lista(t_lista_dupla *, char);
+void insere_fim(t_lista_dupla *, int);
+void exibe_lista(t_lista_dupla *, char *);
+int remove_inicio(t_lista_dupla *);
+int remove_fim(t_lista_dupla *);
