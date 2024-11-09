@@ -1,97 +1,59 @@
-// 24. Escreva uma func¸ao que verifica se duas listas dadas são iguais (mesmo conteúdo)
+// 24. Escreva uma função que verifica se duas listas dadas são iguais (mesmo conteúdo)
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "lista_dupla.h"
+#include <time.h>
 
-// Estrutura de nó para a lista ligada
-typedef struct no {
-    int valor;
-    struct no *proximo;
-} no;
+int listas_sao_iguais(t_lista_dupla *lista1, t_lista_dupla *lista2) {
+    t_no_duplo *no1 = lista1->primeiro;
+    t_no_duplo *no2 = lista2->primeiro;
 
-// Função para adicionar um novo nó ao final da lista ligada
-void adicionar_no(no **comeco, int valor) {
-    no *novo_no = (no *)malloc(sizeof(no));
-    novo_no->valor = valor;
-    novo_no->proximo = NULL;
-
-    if (*comeco == NULL) {
-        *comeco = novo_no;
-        return;
-    }
-
-    no *ultimo = *comeco;
-    while (ultimo->proximo != NULL) {
-        ultimo = ultimo->proximo;
-    }
-    ultimo->proximo = novo_no;
-}
-
-// Função para verificar se duas listas ligadas são iguais
-int listas_sao_iguais(no *lista1, no *lista2) {
-    while (lista1 != NULL && lista2 != NULL) {
-        if (lista1->valor != lista2->valor) {
+    while (no1 != NULL && no2 != NULL) {
+        if (no1->info != no2->info) {
             return 0; // As listas não são iguais
         }
-        lista1 = lista1->proximo;
-        lista2 = lista2->proximo;
+        no1 = no1->proximo;
+        no2 = no2->proximo;
     }
 
     // As duas listas devem ser NULL ao mesmo tempo para serem consideradas iguais
-    return (lista1 == NULL && lista2 == NULL);
+    return (no1 == NULL && no2 == NULL);
 }
 
-// Função para imprimir os valores na lista ligada
-void imprimir_lista(no *comeco) {
-    no *atual = comeco;
-    while (atual != NULL) {
-        printf("%d ", atual->valor);
-        atual = atual->proximo;
-    }
-    printf("\n");
-}
 
 int main() {
-    no *lista1 = NULL;
-    no *lista2 = NULL;
+    t_lista_dupla l1, l2;
     int tamanho, valor;
+
+    // Inicializa as listas
+    inicia_lista(&l1);
+    inicia_lista(&l2);
+
+    srand(time(0));
 
     // Solicita ao usuário o tamanho da lista
     printf("Digite o tamanho da lista: ");
     scanf("%d", &tamanho);
 
-    printf("\n");
-
     // Solicita ao usuário os valores dos elementos e os adiciona à lista1
-    printf("Digite os valores da lista1:\n");
     for (int i = 0; i < tamanho; i++) {
-        printf("Elemento %d: ", i + 1);
-        scanf("%d", &valor);
-        adicionar_no(&lista1, valor);
+        valor = rand() % 100 + 1; // Gera um número aleatório entre 1 e 100
+        insere_fim(&l1, valor);
     }
 
-    // Imprimi os valores da lista1
-    printf("Lista 1: ");
-    imprimir_lista(lista1);
-
-    printf("\n");
+    // Imprime os valores da lista1
+    exibe_lista(&l1, "Lista 1");
 
     // Adiciona elementos à lista2
-    printf("Digite os valores da lista2:\n");
     for (int i = 0; i < tamanho; i++) {
-        printf("Elemento %d: ", i + 1);
-        scanf("%d", &valor);
-        adicionar_no(&lista2, valor);
+        valor = rand() % 100 + 1; // Gera um número aleatório entre 1 e 100
+        insere_inicio(&l2, valor);
     }
 
-    // Imprimi os valores da lista1
-    printf("Lista 2: ");
-    imprimir_lista(lista2);
-
-    printf("\n");
+    // Imprime os valores da lista2
+    exibe_lista(&l2, "Lista 2");
 
     // Verifica se as listas são iguais
-    if (listas_sao_iguais(lista1, lista2)) {
+    if (listas_sao_iguais(&l1, &l2)) {
         printf("As listas sao iguais.\n");
     } else {
         printf("As listas nao sao iguais.\n");

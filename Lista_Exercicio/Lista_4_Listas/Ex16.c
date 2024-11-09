@@ -1,92 +1,50 @@
-//16. Fazer uma funçao que copia uma lista L1 em uma outra lista L2.
+#include "lista_dupla.h"
+#include "time.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-
-// Estrutura de nó para a lista ligada
-typedef struct no {
-    int valor;
-    struct no *proximo;
-} no;
-
-// Função para adicionar um novo nó ao final da lista ligada
-void adicionar_no(no **comeco, int valor) {
-    no *novo_no = (no *)malloc(sizeof(no));
-    novo_no->valor = valor;
-    novo_no->proximo = NULL;
-
-    if (*comeco == NULL) {
-        *comeco = novo_no;
-        return;
-    }
-
-    no *ultimo = *comeco;
-    while (ultimo->proximo != NULL) {
-        ultimo = ultimo->proximo;
-    }
-    ultimo->proximo = novo_no;
-}
-
-// Função para copiar a lista L1 para L2
-void copiar_lista(no *L1, no **L2) {
-    no *atual = L1;
-    while (atual != NULL) {
-        adicionar_no(L2, atual->valor);
-        atual = atual->proximo;
-    }
-}
-
-// Função para imprimir os valores na lista ligada
-void imprimir_lista(no *comeco) {
-    no *atual = comeco;
-    while (atual != NULL) {
-        printf("%d ", atual->valor);
-        atual = atual->proximo;
-    }
-    printf("\n");
-}
-
-// Função para liberar a memória alocada para a lista
-void liberar_lista(no *comeco) {
-    no *atual = comeco;
-    while (atual != NULL) {
-        no *temp = atual;
-        atual = atual->proximo;
-        free(temp);
+void copiar_lista(t_lista_dupla *l1, t_lista_dupla *l2) {
+    t_no_duplo *aux = l1->primeiro;
+    while (aux != NULL) {
+        insere_fim(l2, aux->info);  // Insere no fim de L2
+        aux = aux->proximo;
     }
 }
 
 int main() {
-    no *L1 = NULL;
-    no *L2 = NULL;
-    int n, valor;
+    t_lista_dupla l1, l2;
+    int tamanho_lista, num;
 
-    // Solicita ao usuário o número de elementos na lista L1
-    printf("Quantos elementos deseja adicionar na lista L1? ");
-    scanf("%d", &n);
+    // Inicializa as listas
+    inicia_lista(&l1);
+    inicia_lista(&l2);
 
-    printf ("\n");
+    srand(time(0));
 
-     // Solicita ao usuário os valores dos elementos e os adiciona à lista L1~
-    printf("Digite os valores de cada elemento:\n");
-    for (int i = 0; i < n; i++){
-        printf("%do elemento: ", i + 1);
-        scanf("%d", &valor);
-        adicionar_no(&L1, valor);
+    printf("Digite o tamanho da lista L1: ");
+    scanf("%d", &tamanho_lista);
+
+    printf("\n");
+
+    for (int i = 0; i < tamanho_lista; i++) {
+        num = rand() % 100 + 1; // Gera um número aleatório entre 1 e 100
+        insere_fim(&l1, num);
+        exibe_lista(&l1, "Inserido na lista");
     }
 
-    printf("Lista L1: ");
-    imprimir_lista(L1);
+    printf("\n\nListas completas\n");
+    exibe_lista(&l1, "Lista L1");
 
     // Copia a lista L1 para L2
-    copiar_lista(L1, &L2);
+    copiar_lista(&l1, &l2);
 
-    printf("Lista L2 (copia de L1): ");
-    imprimir_lista(L2);
+    exibe_lista(&l2, "Lista L2 (copia de L1)");
 
-    // Libera a memória alocada para as listas
-    liberar_lista(L1);
-    liberar_lista(L2);
+    // Libera a memória das listas
+    while (!lista_vazia(&l1)) {
+        remove_inicio(&l1);
+    }
+    while (!lista_vazia(&l2)) {
+        remove_inicio(&l2);
+    }
 
     return 0;
 }
