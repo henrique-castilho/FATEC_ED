@@ -1,6 +1,5 @@
 #include "fila.h"
 
-
 int main() {
     t_fila f, f_par, f_impar;
     inicia_fila(&f);

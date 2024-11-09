@@ -41,7 +41,7 @@ int desempilha (t_lista *l) {
     return i;
 }
 
-
+//Exercícios
 int tamanho_lista (t_lista *l) {
     t_no *aux;
     int cont = 0;

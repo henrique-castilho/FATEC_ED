@@ -71,6 +71,7 @@ void exibe_ultimo(t_fila *f) {
     }
 }
 
+//Exercício
 void separa_fila(t_fila *f, t_fila *f_par, t_fila *f_impar) {
     while (!fila_vazia(f)){
         int num = desenfileira(f);
